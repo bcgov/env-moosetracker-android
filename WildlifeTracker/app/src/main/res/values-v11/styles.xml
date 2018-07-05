@@ -1,0 +1,6 @@
+<resources>
+
+    <style name="DialogBaseTheme" parent="android:Theme.Holo.Light.Dialog">
+    </style>
+
+</resources>

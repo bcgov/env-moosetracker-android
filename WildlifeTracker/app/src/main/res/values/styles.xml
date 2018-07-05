@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--
+        <item name="colorPrimary">@color/primary</item>
+        -->
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+    <style name="ToolbarLightText" parent="AppTheme">
+        <item name="colorPrimary">@color/bc_blue</item>
+        <item name="android:background">@color/bc_blue</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="DialogBaseTheme" parent="android:Theme.Dialog">
+        <item name="android:expandableListViewStyle">@style/MyListViewStyle</item>
+    </style>
+
+    <style name="MyListViewStyle" parent="@android:style/Widget.ExpandableListView">
+        <item name="android:divider">@drawable/region_picker_divider</item>
+        <item name="android:childDivider">@drawable/region_picker_divider</item>
+        <item name="android:dividerHeight">1px</item>
+    </style>
+
+</resources>

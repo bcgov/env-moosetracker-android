@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/regs_frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ca.bc.gov.fw.wildlifetracker.RegulationsViewPager
+        android:id="@+id/regulationsPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/noInlinePdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="@string/external_pdf_viewer"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_marginBottom="24dp"
+            android:gravity="center_horizontal" />
+        <Button
+            android:id="@+id/btnViewPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/install_button_title" />
+    </LinearLayout>
+</FrameLayout>

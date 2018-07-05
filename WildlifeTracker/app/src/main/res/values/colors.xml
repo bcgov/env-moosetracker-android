@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="region_picker_text">#C0C0C0</color>
+    <color name="divider_color">#808080</color>
+    <color name="primary">#304fa2</color>
+    <color name="primary_dark">#1a2f5c</color>
+    <color name="accent">#fcb415</color>
+    <color name="bc_yellow">#fcb415</color>
+    <color name="bc_blue">#304fa2</color>
+    <color name="statistics_effort_bg">#fbf2dc</color>
+    <color name="statistics_sightings_bg">#e0e8ff</color>
+
+</resources>

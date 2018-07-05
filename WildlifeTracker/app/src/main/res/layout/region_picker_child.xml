@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/ivChildSelectedIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:paddingLeft="15dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:src="@drawable/btn_check_buttonless_on" />
+
+    <TextView
+        android:id="@+id/tvChildName"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:paddingLeft="60dp"
+        android:gravity="left|center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</FrameLayout>
