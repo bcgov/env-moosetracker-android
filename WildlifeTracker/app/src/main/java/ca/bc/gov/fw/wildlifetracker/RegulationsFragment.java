@@ -1,18 +1,14 @@
 package ca.bc.gov.fw.wildlifetracker;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +25,7 @@ import java.util.HashMap;
 
 public class RegulationsFragment extends Fragment implements RegulationsPageFragment.RegulationsPageFragmentContainer, OnPageChangeListener, RegulationsIndexDialogFragment.RegulationsIndexDialogListener {
 
-    private static final String REGS_PDF_FILENAME = "regs_2016.pdf";
+    private static final String REGS_PDF_FILENAME = "regs_2018.pdf";
 
     public static File getRegulationsFile(Context context) throws IOException {
         File extDir = context.getExternalFilesDir(null);
@@ -37,7 +33,7 @@ public class RegulationsFragment extends Fragment implements RegulationsPageFrag
         Log.i(MainActivity.LOG_TAG, "Regs temp file: " + tempFile);
         if (!tempFile.exists()) {
             Log.i(MainActivity.LOG_TAG, "Temp file does not exist - copying from assets");
-            InputStream is = context.getAssets().open("regulations_2016_2018.pdf");
+            InputStream is = context.getAssets().open("regulations_2018_2020.pdf");
             FileOutputStream os = new FileOutputStream(tempFile);
             byte[] buffer = new byte[1024];
             int read;
@@ -157,6 +153,7 @@ public class RegulationsFragment extends Fragment implements RegulationsPageFrag
         } else if (pageToDisplay_ >= 0) {
 			showPage(pageToDisplay_);
 		}
+		setupIndexButton(getUserVisibleHint());
     }
 
 	public void showPage(int page) {
@@ -173,52 +170,7 @@ public class RegulationsFragment extends Fragment implements RegulationsPageFrag
         super.setUserVisibleHint(isVisibleToUser);
         if (getActivity() == null)
             return;
-        ImageButton indexButton = (ImageButton) getActivity().findViewById(R.id.btnRegsIndex);
-        if (indexButton != null) {
-            boolean showIndex = isVisibleToUser;
-            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
-                // Always hide index if we're not showing regulations pages in-app
-                showIndex = false;
-            }
-            if (showIndex) {
-                indexButton.setVisibility(View.VISIBLE);
-                indexButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RegulationsIndexDialogFragment frag = new RegulationsIndexDialogFragment();
-                        frag.setStyle(DialogFragment.STYLE_NORMAL, R.style.MyListViewStyle);
-                        frag.show(RegulationsFragment.this.getChildFragmentManager(), null);
-                    }
-                });
-            } else {
-                indexButton.setVisibility(View.GONE);
-                indexButton.setOnClickListener(null);
-            }
-        }
-        if (isVisibleToUser && !didShowDisclaimer__) {
-            didShowDisclaimer__ = true;
-            DialogFragment dialog = new DialogFragment() {
-                @NonNull
-                @Override
-                public Dialog onCreateDialog(Bundle savedInstanceState) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setMessage(R.string.regs_disclaimer_message)
-                            .setTitle(R.string.regs_disclaimer_title)
-                            .setPositiveButton(R.string.regs_disclaimer_ok_button, null)
-                            .setNegativeButton(R.string.regs_disclaimer_view_online_button, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Uri webpage = Uri.parse("http://www2.gov.bc.ca/gov/content/sports-culture/recreation/fishing-hunting/hunting/regulations-synopsis");
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                                        startActivity(intent);
-                                    }
-                                }
-                            });
-                    return builder.create();
-                }
-            };
-            dialog.show(getChildFragmentManager(), "DisclaimerDialogFragment");
-        }
+        setupIndexButton(isVisibleToUser);
     }
 
     @Override
@@ -253,6 +205,36 @@ public class RegulationsFragment extends Fragment implements RegulationsPageFrag
             toast_.show();
 		}
 	}
+
+	private void setupIndexButton(boolean visible) {
+        ImageButton indexButton = (ImageButton) getActivity().findViewById(R.id.btnRegsIndex);
+        if (indexButton != null) {
+            boolean showIndex = visible;
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+                // Always hide index if we're not showing regulations pages in-app
+                showIndex = false;
+            }
+            if (showIndex) {
+                indexButton.setVisibility(View.VISIBLE);
+                indexButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RegulationsIndexDialogFragment frag = new RegulationsIndexDialogFragment();
+                        frag.setStyle(DialogFragment.STYLE_NORMAL, R.style.MyListViewStyle);
+                        frag.show(RegulationsFragment.this.getChildFragmentManager(), null);
+                    }
+                });
+            } else {
+                indexButton.setVisibility(View.GONE);
+                indexButton.setOnClickListener(null);
+            }
+        }
+        if (visible && !didShowDisclaimer__) {
+            didShowDisclaimer__ = true;
+            DialogFragment dialog = new RegulationsDisclaimerDialogFragment();
+            dialog.show(getChildFragmentManager(), "RegulationsDisclaimerDialogFragment");
+        }
+    }
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {		

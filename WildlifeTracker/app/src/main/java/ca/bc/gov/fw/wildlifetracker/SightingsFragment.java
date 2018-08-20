@@ -1,6 +1,7 @@
 package ca.bc.gov.fw.wildlifetracker;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
@@ -368,12 +369,13 @@ public class SightingsFragment extends Fragment
             return;
         }
         RegionManager.RegionResult result = RegionManager.getInstance().regionsForLocation(location);
-        if ((result.regions_ != null) && (result.regions_.length > 0) && !userHasChangedMU_) {
+        if ((result != null) && (result.regions_ != null) && (result.regions_.length > 0) && !userHasChangedMU_) {
             Log.d(MainActivity.LOG_TAG, "Setting region from location: " + result.regions_[0].name_);
             regionPicked(result.regions_[0].name_);
         }
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode != LOCATIONS_PERMISSION_REQUEST_CODE) {

@@ -3,12 +3,11 @@ apply plugin: 'maven'
 //apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 27
     // resourcePrefix 'mpcht'
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 23
+        minSdkVersion 14
+        targetSdkVersion 27
         versionCode 1
         versionName '1.0'
 
@@ -41,7 +40,8 @@ repositories {
 dependencies {
     //compile fileTree(dir: 'libs', include: ['*.jar'])
     //compile 'com.android.support:support-v4:19.+'
-    provided 'io.realm:realm-android:0.87.5' // "optional" dependency to realm-database API
+    annotationProcessor 'io.realm:realm-android:0.87.5'
+    compileOnly 'io.realm:realm-android:0.87.5' // "optional" dependency to realm-database API
 }
 
 android.libraryVariants.all { variant ->
