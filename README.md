@@ -6,8 +6,18 @@ Android mobile app that allows hunters to participate in moose conservation and 
 ## Usage
 
 ## Requirements
+Minimum Android version 4.0 Ice Cream Sandwich (API level 14).
+Built with Android Studio 3.1.4. Uses API 27 SDK (Android 8.1 Oreo).
 
 ## Installation
+1. Install / update to Android Studio 3.1.4.
+2. Open SDK Manager to ensure you have the Android 8.1 Oreo SDK (API 27) installed.
+3. Clone the repository and open the WildlifeTracker project in Android Studio. The Gradle build should be able to install other dependencies (Google Play Services etc.) automatically.
+4. If running on a physical device, configure your device to allow USB debugging through the [Developer Options screen](https://developer.android.com/studio/debug/dev-options).
+
+From there you should be able to build and run to simulators or connected Android devices.
+
+NOTE: the Maps tab uses the Google Maps API. For this to work properly you need a valid Google API key. This means you must register an app project on the Google Cloud Platform Console, and generate a Google API key which you can add to the `app/src/main/AndroidManifest.xml`. For details on this process, consult the [Google documentation](https://developers.google.com/maps/documentation/android-sdk/signup#key).
 
 ## Project Status
 In production
