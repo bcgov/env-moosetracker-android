@@ -1,4 +1,7 @@
+[Lifecycle:Dormant](https://img.shields.io/badge/Lifecycle-Dormant-ff7f2a)
+
 # env-moosetracker-android
+
 Android mobile app that allows hunters to participate in moose conservation and management.
 
  ## Features
