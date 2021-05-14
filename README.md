@@ -1,4 +1,4 @@
-[Lifecycle:Dormant](https://img.shields.io/badge/Lifecycle-Dormant-ff7f2a)
+![Lifecycle:Dormant](https://img.shields.io/badge/Lifecycle-Dormant-ff7f2a)
 
 # env-moosetracker-android
 
